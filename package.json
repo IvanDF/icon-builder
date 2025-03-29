@@ -1,49 +1,49 @@
 {
-  "name": "react-icons-exporter",
+  "name": "figma-react-icons-exporter",
   "version": "1.0.0",
-  "description": "Your Figma Plugin",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/IvanDF/react-icons-exporter.git"
-  },
-  "author": "iDF",
-  "main": "code.js",
+  "description": "A Figma plugin to export frames as React components with optional Framer Motion support.",
+  "main": "code.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "lint": "eslint --ext .ts,.tsx --ignore-pattern node_modules .",
     "lint:fix": "eslint --ext .ts,.tsx --ignore-pattern node_modules --fix .",
     "watch": "npm run build -- --watch"
   },
-  "author": "",
-  "license": "",
-  "devDependencies": {
-    "@figma/eslint-plugin-figma-plugins": "*",
-    "@figma/plugin-typings": "^1.109.0",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
-    "eslint": "^8.54.0",
-    "typescript": "^5.3.2"
+  "keywords": [
+    "figma",
+    "plugin",
+    "react",
+    "icons",
+    "export",
+    "framer-motion"
+  ],
+  "author": {
+    "name": "IvanDF",
+    "url": "https://ivandf.netlify.app"
   },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:@figma/figma-plugins/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
-    "root": true,
-    "rules": {
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          "argsIgnorePattern": "^_",
-          "varsIgnorePattern": "^_",
-          "caughtErrorsIgnorePattern": "^_"
-        }
-      ]
-    }
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IvanDF/figma-react-icons-exporter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IvanDF/figma-react-icons-exporter/issues"
+  },
+  "homepage": "https://github.com/IvanDF/figma-react-icons-exporter#readme",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^29.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.0.0"
+  },
+  "dependencies": {
+    "framer-motion": "^10.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }

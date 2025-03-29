@@ -1,40 +1,90 @@
-Below are the steps to get your plugin running. You can also find instructions at:
+# 🌟 Figma React Icons Exporter
 
-https://www.figma.com/plugin-docs/plugin-quickstart-guide/
+<div>
+    <img src="./assets/ui-preview.png" alt="SVG Exporter UI Preview" width="350" />
+</div>
 
-This plugin template uses Typescript and NPM, two standard tools in creating JavaScript applications.
+**Figma React Icons Exporter** is a powerful and intuitive Figma plugin that allows you to export frames as React components. With optional support for [Framer Motion](https://www.framer.com/motion/), you can bring your icons to life with animations.
 
-First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
-libraries. You can find the download link here:
+---
 
-https://nodejs.org/en/download/
+## 🚀 Features
 
-Next, install TypeScript using the command:
+- **Export Frames as React Components**: Convert Figma frames into reusable React components.
+- **Framer Motion Support**: Add animations to your icons effortlessly.
+- **Customizable Component Names**: Define your own component and interface names.
+- **Live Code Preview**: View the generated React code before exporting.
+- **User-Friendly Interface**: Intuitive design for a seamless experience.
 
-npm install -g typescript
+---
 
-Finally, in the directory of your plugin, get the latest type definitions for the plugin API by running:
+## 📦 Installation
 
-npm install --save-dev @figma/plugin-typings
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/IvanDF/figma-react-icons-exporter.git
+   ```
 
-If you are familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
-is already valid Typescript code.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-TypeScript adds type annotations to variables. This allows code editors such as Visual Studio Code
-to provide information about the Figma API while you are writing code, as well as help catch bugs
-you previously didn't notice.
+3. Build the plugin:
+   ```bash
+   npm run build
+   ```
 
-For more information, visit https://www.typescriptlang.org/
+4. Load the plugin in Figma:
+   - Open Figma.
+   - Go to `Plugins > Development > Import Plugin from Manifest...`.
+   - Select the `manifest.json` file from the project directory.
 
-Using TypeScript requires a compiler to convert TypeScript (code.ts) into JavaScript (code.js)
-for the browser to run.
+---
 
-We recommend writing TypeScript code using Visual Studio code:
+## 🛠️ Usage
 
-1. Download Visual Studio Code if you haven't already: https://code.visualstudio.com/.
-2. Open this directory in Visual Studio Code.
-3. Compile TypeScript to JavaScript: Run the "Terminal > w..." menu item,
-   then select "npm: watch". You will have to do this again every time
-   you reopen Visual Studio Code.
+1. **Select a Frame**: Choose a frame in your Figma file.
+2. **Customize Options**:
+   - Enter a component name.
+   - Define an interface name.
+   - Enable or disable Framer Motion support.
+3. **Preview the Code**: Click the "Show Preview" button to view the generated React code.
+4. **Export**: Click the "Export Icons" button to download the React component.
 
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+---
+
+## 🎥 Demo
+
+Add a GIF here to demonstrate the plugin in action. Save the GIF in the `assets` folder, e.g., `demo.gif`, and reference it like this:
+
+![Demo](./assets/demo.gif)
+
+---
+
+## 🌈 Why Choose This Plugin?
+
+- **Efficiency**: Save hours of manual coding.
+- **Flexibility**: Customize every aspect of your React components.
+- **Open Source**: Contribute and improve the plugin together.
+
+---
+
+## 📝 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 👨‍💻 Author
+
+Created with ❤️ by [IvanDF](https://ivandf.netlify.app).  
+Feel free to reach out for feedback or collaboration!
+
+---
+
+## 📣 Support
+
+If you find this plugin helpful, please ⭐ the repository and share it with your network!
+
+[![GitHub Stars](https://img.shields.io/github/stars/IvanDF/figma-react-icons-exporter?style=social)](https://github.com/IvanDF/figma-react-icons-exporter/stargazers)
