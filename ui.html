@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG Exporter</title>
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", Arial, sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        padding: 20px;
+        animation: backgroundAnimation 6s infinite alternate;
+      }
+
+      @keyframes backgroundAnimation {
+        0% {
+          background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+        }
+        50% {
+          background: linear-gradient(135deg, #a18cd1, #fbc2eb, #fad0c4);
+        }
+        100% {
+          background: linear-gradient(135deg, #fad0c4, #ff9a9e, #a18cd1);
+        }
+      }
+
+      .container {
+        background: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 40px;
+        width: 100%;
+        max-width: 560px; /* Adjusted for larger widget */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 1s ease-in-out;
+        position: relative;
+        max-height: 600px; /* Added max height for better layout */
+        overflow-y: auto; /* Added scroll for overflow */
+      }
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 25px;
+        color: #fff;
+        text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      label {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        display: block;
+        color: #f0f0f0;
+      }
+
+      input,
+      button {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      input {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        caret-color: #ff758c;
+      }
+
+      input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      input:focus {
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+
+      button {
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #ff7eb3, #ff758c);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      }
+
+      button:active {
+        transform: translateY(0);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .checkbox-container {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .checkbox-container input {
+        margin-right: 10px;
+        width: auto;
+        margin: 0;
+        padding: 0;
+        transform: scale(1.3);
+        accent-color: #ff758c;
+      }
+
+      .checkbox-container label {
+        margin: 0;
+        color: #f0f0f0;
+        font-size: 1rem;
+      }
+
+      .tooltip {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background: #ff758c;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .code-preview {
+        margin-top: 20px;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        overflow-x: auto;
+        overflow-y: auto; /* Added vertical scroll */
+        max-height: 300px; /* Increased max height for larger content */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .code-preview pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>SVG Exporter</h1>
+
+      <label for="componentName">Component Name:</label>
+      <input
+        type="text"
+        id="componentName"
+        placeholder="Enter component name (e.g., IconComponent)"
+        value="IconComponent"
+      />
+      <div id="selectionMessage" class="tooltip" style="display: none">
+        Multiple frames selected. Please select only one frame.
+      </div>
+
+      <label for="interfaceName">Interface Name:</label>
+      <input
+        type="text"
+        id="interfaceName"
+        placeholder="Enter interface name (e.g., IconProps)"
+      />
+      <div class="checkbox-container">
+        <input type="checkbox" id="useFramerMotion" />
+        <label for="useFramerMotion">Use Framer Motion</label>
+      </div>
+      <button id="export" disabled>Export Icons</button>
+
+      <div id="codePreview" class="code-preview">
+        <pre><code id="reactCode"></code></pre>
+      </div>
+    </div>
+
+    <script>
+      const exportButton = document.getElementById("export");
+      const codePreview = document.getElementById("codePreview");
+      const reactCode = document.getElementById("reactCode");
+      const componentNameInput = document.getElementById("componentName");
+      const interfaceNameInput = document.getElementById("interfaceName");
+      const useFramerMotionCheckbox =
+        document.getElementById("useFramerMotion");
+      const selectionMessage = document.getElementById("selectionMessage");
+
+      const notifyInputChange = () => {
+        const componentName = componentNameInput.value || "IconComponent";
+        const interfaceName =
+          interfaceNameInput.value || "{color: string, [key: string]: string}";
+        const useFramerMotion = useFramerMotionCheckbox.checked;
+
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: "input-changed",
+              options: {
+                componentName,
+                interfaceName,
+                useFramerMotion,
+              },
+            },
+          },
+          "*"
+        );
+      };
+
+      exportButton.onclick = () => {
+        const componentName = componentNameInput.value || "IconComponent";
+        const interfaceName =
+          document.getElementById("interfaceName").value ||
+          "{color: string, [key: string]: string}";
+        const useFramerMotion =
+          document.getElementById("useFramerMotion").checked;
+
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: "export-icons",
+              options: {
+                componentName,
+                interfaceName,
+                useFramerMotion,
+              },
+            },
+          },
+          "*"
+        );
+      };
+
+      // Add event listeners to notify the plugin of input changes
+      componentNameInput.addEventListener("input", notifyInputChange);
+      interfaceNameInput.addEventListener("input", notifyInputChange);
+      useFramerMotionCheckbox.addEventListener("change", notifyInputChange);
+
+      // Listen for messages from the plugin
+      window.onmessage = (event) => {
+        const { type, frameName, fileName, content } =
+          event.data.pluginMessage || {};
+
+        if (type === "set-frame-name") {
+          componentNameInput.value = frameName; // Set the input value to the frame name
+          selectionMessage.style.display = "none";
+          exportButton.disabled = false;
+        } else if (type === "multiple-frames-selected") {
+          selectionMessage.style.display = "block";
+          exportButton.disabled = true;
+        } else if (type === "download-file") {
+          const blob = new Blob([content], { type: "text/plain" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = fileName;
+
+          // Trigger the save dialog
+          a.click();
+
+          // Clean up the URL
+          setTimeout(() => {
+            URL.revokeObjectURL(url);
+          }, 500);
+        } else if (type === "preview-code") {
+          reactCode.textContent = content; // Display the React code in the preview
+        }
+      };
+    </script>
+  </body>
+</html>
