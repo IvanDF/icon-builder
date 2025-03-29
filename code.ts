@@ -10,7 +10,6 @@ figma.showUI(__html__, {
   },
 });
 
-// Send the initial frame name to the UI
 const sendFrameNameToUI = async () => {
   const selection = figma.currentPage.selection;
   if (selection.length === 1 && selection[0].type === "FRAME") {
@@ -20,7 +19,6 @@ const sendFrameNameToUI = async () => {
       frameName: frame.name,
     });
 
-    // Generate React code preview
     const svgBytes = await frame.exportAsync({ format: "SVG" });
     const svgContent = String.fromCharCode(...new Uint8Array(svgBytes));
 
@@ -28,7 +26,7 @@ const sendFrameNameToUI = async () => {
     const motionPaths = paths
       .map((path) => {
         const camelCasePath = path
-          .replace(/-([a-z])/g, (_, char) => char.toUpperCase()) // Convert to camelCase
+          .replace(/-([a-z])/g, (_, char) => char.toUpperCase())
           .replace(/<path|\/>/g, "")
           .replace(/stroke="[^"]*"/g, "stroke={color}")
           .replace(/fill="[^"]*"/g, "fill={color}")
@@ -57,7 +55,6 @@ const sendFrameNameToUI = async () => {
       );
     `.trim();
 
-    // Send the React code to the UI for preview
     figma.ui.postMessage({
       type: "preview-code",
       content: tsxContent,
@@ -69,30 +66,25 @@ const sendFrameNameToUI = async () => {
   } else {
     figma.ui.postMessage({
       type: "set-frame-name",
-      frameName: "IconComponent", // Default value if no frame is selected
+      frameName: "IconComponent",
     });
     figma.ui.postMessage({
       type: "preview-code",
-      content: "", // Clear the preview if no frame is selected
+      content: "",
     });
   }
 };
+
 sendFrameNameToUI();
 
-// Listen for selection changes and update the UI
 figma.on("selectionchange", () => {
   sendFrameNameToUI();
 });
 
 figma.ui.onmessage = async (msg) => {
-  console.log("🔎 [code.ts at 40] msg => ", msg);
-
   if (msg.type === "export-icons") {
-    console.log("🔎 [code.ts at 43]  => msg.options", msg.options);
-
-    const { useFramerMotion, interfaceName, componentName } = msg.options; // Get options from UI
+    const { useFramerMotion, interfaceName, componentName } = msg.options;
     const selection = figma.currentPage.selection;
-    console.log("🔎 [code.ts at 47] selection => ", selection);
 
     if (selection.length === 0) {
       figma.notify("Please select at least one frame.");
@@ -101,8 +93,6 @@ figma.ui.onmessage = async (msg) => {
 
     for (const node of selection) {
       if (node.type === "FRAME") {
-        console.log("🔎 [code.ts at 56] node.name => ", node.name);
-
         const name = componentName
           ? componentName
               .replace(/(?:^\w|[A-Z]|\b\w)/g, (word: string) =>
@@ -113,12 +103,11 @@ figma.ui.onmessage = async (msg) => {
         const svgBytes = await node.exportAsync({ format: "SVG" });
         const svgContent = String.fromCharCode(...new Uint8Array(svgBytes));
 
-        // Extract paths from the SVG content
         const paths = svgContent.match(/<path[^>]*>/g) || [];
         const motionPaths = paths
           .map((path) => {
             const camelCasePath = path
-              .replace(/-([a-z])/g, (_, char) => char.toUpperCase()) // Convert to camelCase
+              .replace(/-([a-z])/g, (_, char) => char.toUpperCase())
               .replace(/<path|\/>/g, "")
               .replace(/stroke="[^"]*"/g, "stroke={color}")
               .replace(/fill="[^"]*"/g, "fill={color}")
@@ -152,15 +141,13 @@ figma.ui.onmessage = async (msg) => {
           );
         `.trim();
 
-        // Send the file content and name to the UI for download
         figma.ui.postMessage({
           type: "download-file",
           fileName: `${name}.tsx`,
           content: tsxContent,
-          folderName: "Downloads", // Specify the folder name
+          folderName: "Downloads",
         });
 
-        // Send the React code to the UI for preview
         figma.ui.postMessage({
           type: "preview-code",
           content: tsxContent,

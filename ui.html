@@ -136,30 +136,6 @@
         font-size: 1rem;
       }
 
-      .tooltip {
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        background: #ff758c;
-        color: #fff;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 0.8rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        animation: fadeIn 0.5s ease-in-out;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
       .code-preview {
         margin-top: 20px;
         padding: 15px;
@@ -191,9 +167,6 @@
         placeholder="Enter component name (e.g., IconComponent)"
         value="IconComponent"
       />
-      <div id="selectionMessage" class="tooltip" style="display: none">
-        Multiple frames selected. Please select only one frame.
-      </div>
 
       <label for="interfaceName">Interface Name:</label>
       <input
@@ -201,10 +174,12 @@
         id="interfaceName"
         placeholder="Enter interface name (e.g., IconProps)"
       />
+
       <div class="checkbox-container">
         <input type="checkbox" id="useFramerMotion" />
         <label for="useFramerMotion">Use Framer Motion</label>
       </div>
+
       <button id="export" disabled>Export Icons</button>
 
       <div id="codePreview" class="code-preview">
@@ -220,7 +195,6 @@
       const interfaceNameInput = document.getElementById("interfaceName");
       const useFramerMotionCheckbox =
         document.getElementById("useFramerMotion");
-      const selectionMessage = document.getElementById("selectionMessage");
 
       const notifyInputChange = () => {
         const componentName = componentNameInput.value || "IconComponent";
@@ -246,10 +220,8 @@
       exportButton.onclick = () => {
         const componentName = componentNameInput.value || "IconComponent";
         const interfaceName =
-          document.getElementById("interfaceName").value ||
-          "{color: string, [key: string]: string}";
-        const useFramerMotion =
-          document.getElementById("useFramerMotion").checked;
+          interfaceNameInput.value || "{color: string, [key: string]: string}";
+        const useFramerMotion = useFramerMotionCheckbox.checked;
 
         parent.postMessage(
           {
@@ -266,22 +238,18 @@
         );
       };
 
-      // Add event listeners to notify the plugin of input changes
       componentNameInput.addEventListener("input", notifyInputChange);
       interfaceNameInput.addEventListener("input", notifyInputChange);
       useFramerMotionCheckbox.addEventListener("change", notifyInputChange);
 
-      // Listen for messages from the plugin
       window.onmessage = (event) => {
         const { type, frameName, fileName, content } =
           event.data.pluginMessage || {};
 
         if (type === "set-frame-name") {
-          componentNameInput.value = frameName; // Set the input value to the frame name
-          selectionMessage.style.display = "none";
+          componentNameInput.value = frameName;
           exportButton.disabled = false;
         } else if (type === "multiple-frames-selected") {
-          selectionMessage.style.display = "block";
           exportButton.disabled = true;
         } else if (type === "download-file") {
           const blob = new Blob([content], { type: "text/plain" });
@@ -289,16 +257,10 @@
           const a = document.createElement("a");
           a.href = url;
           a.download = fileName;
-
-          // Trigger the save dialog
           a.click();
-
-          // Clean up the URL
-          setTimeout(() => {
-            URL.revokeObjectURL(url);
-          }, 500);
+          setTimeout(() => URL.revokeObjectURL(url), 500);
         } else if (type === "preview-code") {
-          reactCode.textContent = content; // Display the React code in the preview
+          reactCode.textContent = content;
         }
       };
     </script>
