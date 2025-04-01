@@ -1,7 +1,7 @@
 {
-  "name": "figma-react-icons-exporter",
+  "name": "iconcraft",
   "version": "1.0.0",
-  "description": "A Figma plugin to export frames as React components with optional Framer Motion support.",
+  "description": "A Figma plugin to craft and export icons as React components, with support for animations and future frameworks.",
   "main": "code.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -15,7 +15,8 @@
     "react",
     "icons",
     "export",
-    "framer-motion"
+    "framer-motion",
+    "iconcraft"
   ],
   "author": {
     "name": "IvanDF",
@@ -24,12 +25,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IvanDF/figma-react-icons-exporter.git"
+    "url": "https://github.com/IvanDF/iconcraft.git"
   },
   "bugs": {
-    "url": "https://github.com/IvanDF/figma-react-icons-exporter/issues"
+    "url": "https://github.com/IvanDF/iconcraft/issues"
   },
-  "homepage": "https://github.com/IvanDF/figma-react-icons-exporter#readme",
+  "homepage": "https://github.com/IvanDF/iconcraft#readme",
   "devDependencies": {
     "@figma/eslint-plugin-figma-plugins": "*",
     "@figma/plugin-typings": "*",
