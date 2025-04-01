@@ -60,9 +60,8 @@
 
 ## 🎥 Demo
 
-Add a GIF here to demonstrate the plugin in action. Save the GIF in the `assets` folder, e.g., `demo.gif`, and reference it like this:
-
-![Demo](./assets/demo.gif)
+Experience IconCraft in action with this demonstration:  
+![Plugin Demo](./assets/demo.gif)
 
 ---
 
