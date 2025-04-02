@@ -59,22 +59,6 @@
 
 ---
 
-## 🎥 Demo
-
-See IconCraft in action:  
-![Plugin Demo](./assets/demo.gif)
-
----
-
-## 🌈 Why Choose IconCraft?
-
-- **Save Time**: Forget manual coding—IconCraft does it all for you.
-- **Full Flexibility**: Customize every aspect of your React components.
-- **Future-Proof**: Support for additional frameworks is coming soon.
-- **Open Source**: Contribute and help us make the plugin even better.
-
----
-
 ## 👨‍💻 Author
 
 Created with ❤️ by [IvanDF](https://ivandf.netlify.app).  
