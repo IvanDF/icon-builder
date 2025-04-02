@@ -1,7 +1,7 @@
 figma.showUI(__html__, {
   width: 500,
   height: 650,
-  title: "IconCraft",
+  title: "Icon Builder",
   themeColors: true,
   visible: true,
   position: {

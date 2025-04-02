@@ -1,10 +1,10 @@
-# 🌟 IconCraft
+# 🛠️ IconBuilder
 
 <div>
     <img src="./assets/ui-preview.png" alt="SVG Exporter UI Preview" width="350" />
 </div>
 
-**IconCraft** is a simple yet powerful Figma plugin that lets you turn your frames into reusable React components. With optional support for [Framer Motion](https://www.framer.com/motion/), you can easily add animations to your icons. Future updates will include support for other frameworks as well.
+**IconBuilder** is a Figma plugin that helps you turn your frames, components, or instances into reusable components. Whether you're working with React or adding animations with [Framer Motion](https://www.framer.com/motion/), IconBuilder makes the process smooth and efficient. And hey, we're just getting started—future updates will bring support for even more frameworks!
 
 ---
 
@@ -24,7 +24,7 @@
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/IvanDF/iconcraft.git
+   git clone https://github.com/IvanDF/icon-builder.git
    ```
 
 2. Install dependencies:
@@ -40,11 +40,12 @@
    ```
 
 4. Load the plugin in Figma:
+
    - Open Figma.
    - Go to `Plugins > Development > Import Plugin from Manifest...`.
    - Select the `manifest.json` file from the project directory.
 
----
+   ***
 
 ## 🛠️ How to Use
 
@@ -74,12 +75,6 @@ See IconCraft in action:
 
 ---
 
-## 📝 License
-
-This project is open source and licensed under the [MIT License](./LICENSE).
-
----
-
 ## 👨‍💻 Author
 
 Created with ❤️ by [IvanDF](https://ivandf.netlify.app).  
@@ -89,6 +84,6 @@ Have feedback or want to collaborate? Feel free to reach out!
 
 ## 📣 Support
 
-If you find this plugin helpful, please ⭐ the repository and share it with your network!
+If you find IconBuilder helpful, please ⭐ the repository and share it with your network!
 
-[![GitHub Stars](https://img.shields.io/github/stars/IvanDF/figma-react-icons-exporter?style=social)](https://github.com/IvanDF/figma-react-icons-exporter/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/IvanDF/icon-builder?style=social)](https://github.com/IvanDF/icon-builder/stargazers)
