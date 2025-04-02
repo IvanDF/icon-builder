@@ -10,13 +10,24 @@ figma.showUI(__html__, {
   },
 });
 
+const sanitizeComponentName = (name: string): string => {
+  return name.replace(/^As=/, "").replace(/\s+/g, "");
+};
+
 const sendFrameNameToUI = async () => {
   const selection = figma.currentPage.selection;
-  if (selection.length === 1 && selection[0].type === "FRAME") {
+
+  if (
+    (selection.length === 1 && selection[0].type === "FRAME") ||
+    selection[0].type === "COMPONENT" ||
+    selection[0].type === "INSTANCE"
+  ) {
     const frame = selection[0];
+    const sanitizedName = sanitizeComponentName(frame.name);
+
     figma.ui.postMessage({
       type: "set-frame-name",
-      frameName: frame.name,
+      frameName: sanitizedName,
     });
 
     const svgBytes = await frame.exportAsync({ format: "SVG" });
@@ -45,10 +56,7 @@ const sendFrameNameToUI = async () => {
     const tsxContent = `
       import React from "react";
 
-      export const ${frame.name.replace(
-        /\s+/g,
-        ""
-      )}: React.FC<{ color: string }> = ({ color, ...props }) => (
+      export const ${sanitizedName}: React.FC<{ color: string }> = ({ color, ...props }) => (
         <g>
           ${motionPaths}
         </g>
@@ -92,14 +100,12 @@ figma.ui.onmessage = async (msg) => {
     }
 
     for (const node of selection) {
-      if (node.type === "FRAME") {
-        const name = componentName
-          ? componentName
-              .replace(/(?:^\w|[A-Z]|\b\w)/g, (word: string) =>
-                word.toUpperCase()
-              )
-              .replace(/\s+/g, "")
-          : node.name.replace(/\s+/g, "");
+      if (
+        node.type === "FRAME" ||
+        node.type === "COMPONENT" ||
+        node.type === "INSTANCE"
+      ) {
+        const sanitizedName = sanitizeComponentName(node.name);
         const svgBytes = await node.exportAsync({ format: "SVG" });
         const svgContent = String.fromCharCode(...new Uint8Array(svgBytes));
 
@@ -134,7 +140,7 @@ figma.ui.onmessage = async (msg) => {
           import React from "react";
           ${useFramerMotion ? 'import { motion } from "framer-motion";' : ""}
 
-          export const ${name}: React.FC<${interfaceName}> = ({ color, ...props }) => (
+          export const ${sanitizedName}: React.FC<${interfaceName}> = ({ color, ...props }) => (
             <g>
               ${motionPaths}
             </g>
@@ -143,7 +149,7 @@ figma.ui.onmessage = async (msg) => {
 
         figma.ui.postMessage({
           type: "download-file",
-          fileName: `${name}.tsx`,
+          fileName: `${sanitizedName}.tsx`,
           content: tsxContent,
           folderName: "Downloads",
         });
@@ -153,7 +159,7 @@ figma.ui.onmessage = async (msg) => {
           content: tsxContent,
         });
 
-        figma.notify(`Prepared ${name}.tsx for download.`);
+        figma.notify(`Prepared ${sanitizedName}.tsx for download.`);
       }
     }
   }
