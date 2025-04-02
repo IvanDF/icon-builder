@@ -1,10 +1,13 @@
-# 🛠️ IconBuilder
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:24px">
+   <img src="./assets/logo.png" alt="Icon Builder Logo" width="24" height="24" />
+   <h1 style="margin:0;padding:0">Icon Builder</h1>
+</div>
 
 <div>
     <img src="./assets/ui-preview.png" alt="SVG Exporter UI Preview" width="350" />
 </div>
 
-**IconBuilder** is a Figma plugin that helps you turn your frames, components, or instances into reusable components. Whether you're working with React or adding animations with [Framer Motion](https://www.framer.com/motion/), IconBuilder makes the process smooth and efficient. And hey, we're just getting started—future updates will bring support for even more frameworks!
+**Icon Builder** is a Figma plugin that helps you turn your frames, components, or instances into reusable components. Whether you're working with React or adding animations with [Framer Motion](https://www.framer.com/motion/), Icon Builder makes the process smooth and efficient. And hey, we're just getting started—future updates will bring support for even more frameworks!
 
 ---
 
@@ -68,6 +71,6 @@ Have feedback or want to collaborate? Feel free to reach out!
 
 ## 📣 Support
 
-If you find IconBuilder helpful, please ⭐ the repository and share it with your network!
+If you find Icon Builder helpful, please ⭐ the repository and share it with your network!
 
 [![GitHub Stars](https://img.shields.io/github/stars/IvanDF/icon-builder?style=social)](https://github.com/IvanDF/icon-builder/stargazers)
