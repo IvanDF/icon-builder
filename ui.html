@@ -175,16 +175,24 @@
       />
 
       <div class="checkbox-container">
-        <input type="checkbox" id="useFramerMotion" />
-        <label for="useFramerMotion">Use Framer Motion</label>
+        <label
+          for="useFramerMotion"
+          style="cursor: pointer; display: flex; align-items: center; gap: 10px"
+        >
+          <input
+            type="checkbox"
+            id="useFramerMotion"
+            style="
+              transform: scale(1.3);
+              accent-color: #ff758c;
+              cursor: pointer;
+            "
+          />
+          Use Framer Motion
+        </label>
       </div>
 
-      <div class="checkbox-container">
-        <input type="checkbox" id="generateWrapper" />
-        <label for="generateWrapper">Generate Icon Wrapper</label>
-      </div>
-
-      <button id="export" disabled>Export Icons</button>
+      <button id="export" disabled>Export Icon</button>
 
       <div class="wrapper-info">
         <button
@@ -221,7 +229,7 @@
             </p>
 
             <a
-              href="https://github.com/IvanDF/icon-builder"
+              href="https://github.com/IvanDF/icon-builder?tab=readme-ov-file#-the-wrapper-component"
               target="_blank"
               style="color: #ff758c; text-decoration: underline"
               onclick="event.stopPropagation();"
@@ -245,8 +253,6 @@
       const interfaceNameInput = document.getElementById("interfaceName");
       const useFramerMotionCheckbox =
         document.getElementById("useFramerMotion");
-      const generateWrapperCheckbox =
-        document.getElementById("generateWrapper");
       const exportWrapperButton = document.getElementById("exportWrapper");
       const popup = document.getElementById("popup");
 
@@ -270,6 +276,8 @@
           "*"
         );
       };
+
+      useFramerMotionCheckbox.onchange = notifyInputChange;
 
       exportButton.onclick = () => {
         const componentName = componentNameInput.value || "IconComponent";
@@ -301,10 +309,15 @@
       };
 
       exportWrapperButton.onclick = () => {
+        const useFramerMotion = useFramerMotionCheckbox.checked;
+
         parent.postMessage(
           {
             pluginMessage: {
               type: "export-wrapper",
+              options: {
+                useFramerMotion,
+              },
             },
           },
           "*"
@@ -313,7 +326,6 @@
 
       componentNameInput.addEventListener("input", notifyInputChange);
       interfaceNameInput.addEventListener("input", notifyInputChange);
-      useFramerMotionCheckbox.addEventListener("change", notifyInputChange);
 
       window.onmessage = (event) => {
         const { type, frameName, fileName, content } =

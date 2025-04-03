@@ -91,8 +91,7 @@ figma.on("selectionchange", () => {
 
 figma.ui.onmessage = async (msg) => {
   if (msg.type === "export-icons") {
-    const { useFramerMotion, interfaceName, componentName, generateWrapper } =
-      msg.options;
+    const { useFramerMotion, interfaceName } = msg.options;
     const selection = figma.currentPage.selection;
 
     if (selection.length === 0) {
@@ -155,69 +154,17 @@ figma.ui.onmessage = async (msg) => {
           folderName: "Downloads",
         });
 
-        if (generateWrapper) {
-          const wrapperContent = `
-            import React from "react";
-            ${useFramerMotion ? 'import { motion } from "framer-motion";' : ""}
-
-            export const Icon: React.FC<{
-              as: React.FC<React.SVGProps<SVGSVGElement>>;
-              size?: number | string;
-              color?: string;
-              onClick?: () => void;
-            }> = ({ as: IconComponent, size = 24, color = "currentColor", onClick, ...props }) => {
-              return (
-                <div
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: onClick ? "pointer" : "default",
-                  }}
-                >
-                  ${
-                    useFramerMotion
-                      ? `
-                  <motion.svg
-                    width={size}
-                    height={size}
-                    fill={color}
-                    whileHover={onClick ? { scale: 1.2 } : undefined}
-                    whileTap={onClick ? { scale: 0.8 } : undefined}
-                    onClick={onClick}
-                    {...props}
-                  >
-                    <IconComponent />
-                  </motion.svg>
-                  `
-                      : `
-                  <svg width={size} height={size} fill={color} {...props}>
-                    <IconComponent />
-                  </svg>
-                  `
-                  }
-                </div>
-              );
-            };
-          `.trim();
-
-          figma.ui.postMessage({
-            type: "download-file",
-            fileName: `Icon.tsx`,
-            content: wrapperContent,
-            folderName: "Downloads",
-          });
-        }
-
         figma.notify(`Prepared ${sanitizedName}.tsx for download.`);
       }
     }
   }
 
   if (msg.type === "export-wrapper") {
+    const { useFramerMotion } = msg.options;
+
     const wrapperContent = `
       import React from "react";
-      import { motion } from "framer-motion";
+      ${useFramerMotion ? 'import { motion } from "framer-motion";' : ""}
 
       export const Icon: React.FC<{
         as: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -234,6 +181,9 @@ figma.ui.onmessage = async (msg) => {
               cursor: onClick ? "pointer" : "default",
             }}
           >
+            ${
+              useFramerMotion
+                ? `
             <motion.svg
               width={size}
               height={size}
@@ -245,6 +195,13 @@ figma.ui.onmessage = async (msg) => {
             >
               <IconComponent />
             </motion.svg>
+            `
+                : `
+            <svg width={size} height={size} fill={color} {...props}>
+              <IconComponent />
+            </svg>
+            `
+            }
           </div>
         );
       };
