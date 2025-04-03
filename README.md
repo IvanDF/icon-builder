@@ -7,7 +7,7 @@
     <img src="./assets/ui-preview.png" alt="SVG Exporter UI Preview" width="350" />
 </div>
 
-**Icon Builder** is a Figma plugin that helps you turn your frames, components, or instances into reusable components. Whether you're working with React or adding animations with [Framer Motion](https://www.framer.com/motion/), Icon Builder makes the process smooth and efficient. And hey, we're just getting started—future updates will bring support for even more frameworks!
+**Icon Builder** is a Figma plugin that helps you turn your frames, components, or instances into reusable React components. Whether you're working with React or adding animations with [Framer Motion](https://www.framer.com/motion/), Icon Builder makes the process smooth and efficient. And hey, we're just getting started—future updates will bring support for even more frameworks!
 
 ---
 
@@ -17,8 +17,8 @@
 - **Framer Motion Support**: Add animations to your icons effortlessly.
 - **Customizable Names**: Choose your own component and interface names.
 - **Code Preview**: See the generated code before exporting.
+- **Preconfigured Wrapper**: Download a ready-to-use wrapper for managing icons.
 - **User-Friendly Interface**: Designed to make everything quick and easy.
-- **Future-Ready**: Built to support additional frameworks in upcoming versions.
 
 ---
 
@@ -48,9 +48,20 @@
    - Go to `Plugins > Development > Import Plugin from Manifest...`.
    - Select the `manifest.json` file from the project directory.
 
-   ***
+---
 
-## 🛠️ How to Use
+## 🧩 The Wrapper Component
+
+The wrapper is a reusable React component that simplifies the use of exported icons. It allows you to manage size, color, animations, and interactions in a centralized way.
+
+### Learn More
+
+- [Standard Wrapper Documentation](./examples/standard/README.md)
+- [Framer Motion Wrapper Documentation](./examples/framer/README.md)
+
+---
+
+## 🛠️ How to Use the Plugin
 
 1. **Select a Frame**: Choose a frame, component, or instance in your Figma file.
 2. **Customize Options**:

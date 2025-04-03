@@ -179,7 +179,58 @@
         <label for="useFramerMotion">Use Framer Motion</label>
       </div>
 
+      <div class="checkbox-container">
+        <input type="checkbox" id="generateWrapper" />
+        <label for="generateWrapper">Generate Icon Wrapper</label>
+      </div>
+
       <button id="export" disabled>Export Icons</button>
+
+      <div class="wrapper-info">
+        <button
+          id="exportWrapper"
+          style="display: block; margin: 0 auto; position: relative"
+        >
+          Create Icon Wrapper
+
+          <div
+            id="popup"
+            style="
+              display: none;
+              position: absolute;
+              top: 110%;
+              left: 50%;
+              transform: translateX(-50%);
+              background: rgba(0, 0, 0, 0.95);
+              color: #fff;
+              padding: 15px;
+              border-radius: 10px;
+              z-index: 1000;
+              text-align: center;
+              width: 300px;
+              font-size: 0.9rem;
+              line-height: 1.5;
+              box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            "
+          >
+            <p style="margin: 0; font-weight: bold">What is the Wrapper?</p>
+            <p style="margin: 10px 0">
+              The wrapper is a reusable React component that simplifies the use
+              of exported icons. It allows you to manage size, color, and
+              animations in a centralized way.
+            </p>
+
+            <a
+              href="https://github.com/IvanDF/icon-builder"
+              target="_blank"
+              style="color: #ff758c; text-decoration: underline"
+              onclick="event.stopPropagation();"
+            >
+              Learn more in the documentation
+            </a>
+          </div>
+        </button>
+      </div>
 
       <div id="codePreview" class="code-preview">
         <pre><code id="reactCode"></code></pre>
@@ -194,6 +245,10 @@
       const interfaceNameInput = document.getElementById("interfaceName");
       const useFramerMotionCheckbox =
         document.getElementById("useFramerMotion");
+      const generateWrapperCheckbox =
+        document.getElementById("generateWrapper");
+      const exportWrapperButton = document.getElementById("exportWrapper");
+      const popup = document.getElementById("popup");
 
       const notifyInputChange = () => {
         const componentName = componentNameInput.value || "IconComponent";
@@ -231,6 +286,25 @@
                 interfaceName,
                 useFramerMotion,
               },
+            },
+          },
+          "*"
+        );
+      };
+
+      exportWrapperButton.onmouseover = () => {
+        popup.style.display = "block";
+      };
+
+      exportWrapperButton.onmouseout = () => {
+        popup.style.display = "none";
+      };
+
+      exportWrapperButton.onclick = () => {
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: "export-wrapper",
             },
           },
           "*"
