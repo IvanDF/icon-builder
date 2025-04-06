@@ -207,27 +207,6 @@ figma.ui.onmessage = async (msg) => {
       };
     `.trim();
 
-    const exampleIconContent = `
-      import React from "react";
-
-      export const ExampleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          {...props}
-        >
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="8" x2="12" y2="12" />
-          <line x1="12" y1="16" x2="12.01" y2="16" />
-        </svg>
-      );
-    `.trim();
-
     const indexContent = `
       export * from "./ExampleIcon";
     `.trim();
@@ -237,13 +216,6 @@ figma.ui.onmessage = async (msg) => {
       fileName: `Icon.tsx`,
       content: wrapperContent,
       folderName: "IconWrapper",
-    });
-
-    figma.ui.postMessage({
-      type: "download-file",
-      fileName: `ExampleIcon.tsx`,
-      content: exampleIconContent,
-      folderName: "IconWrapper/partials/icons",
     });
 
     figma.ui.postMessage({
