@@ -1,87 +1,79 @@
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:24px">
-   <img src="./assets/logo.png" alt="Icon Builder Logo" width="24" height="24" />
-   <h1 style="margin:0;padding:0">Icon Builder</h1>
+<div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
+  <h1 style={{ margin: 0, padding: 0 }}>Icon Builder</h1>
 </div>
 
-<div>
-    <img src="./assets/ui-preview.png" alt="SVG Exporter UI Preview" width="350" />
-</div>
+<img src="./assets/ui-preview.png" alt="Icon Builder UI" width={350} />
 
-**Icon Builder** is a Figma plugin that helps you turn your frames, components, or instances into reusable React components. Whether you're working with React or adding animations with [Framer Motion](https://www.framer.com/motion/), Icon Builder makes the process smooth and efficient. And hey, we're just getting started—future updates will bring support for even more frameworks!
+**Icon Builder** is a Figma plugin that transforms your design elements into reusable React components.  
+Whether you’re prototyping icons or building design systems, Icon Builder ensures your visuals are scalable, animated, and developer-friendly.
+
+> 🎨 **Try the Plugin on Figma**  
+> [Launch Icon Builder →](https://www.figma.com/community/plugin/1489334044911703870/icon-builder)
 
 ---
 
 ## 🚀 Key Features
 
-- **Export Frames as React Components**: Convert your Figma frames into ready-to-use React components.
-- **Framer Motion Support**: Add animations to your icons effortlessly.
-- **Customizable Names**: Choose your own component and interface names.
-- **Code Preview**: See the generated code before exporting.
-- **Preconfigured Wrapper**: Download a ready-to-use wrapper for managing icons.
-- **User-Friendly Interface**: Designed to make everything quick and easy.
+- ⚛️ **React Component Export** – Instantly convert Figma frames, components, or instances to React.
+- 🎞️ **Framer Motion Support** – Enable smooth, declarative animations right out of the box.
+- 🧾 **Custom Naming** – Tailor component and interface names to your codebase.
+- 👁️ **Live Code Preview** – Review the output before export.
+- 🧱 **Icon Wrapper Included** – Standard and animated wrappers provided.
+- 🧙 **Minimal UI** – Designed to stay out of your way and boost productivity.
 
 ---
 
-## 📦 Installation
+## 🛠️ Local Development
 
-1. Clone the repository:
+Clone the repo, install dependencies, and build:
 
-   ```bash
-   git clone https://github.com/IvanDF/icon-builder.git
-   ```
+```bash
+git clone https://github.com/IvanDF/icon-builder.git
+cd icon-builder
+npm install
+npm run build
+```
 
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Build the plugin:
-
-   ```bash
-   npm run build
-   ```
-
-4. Load the plugin in Figma:
-
-   - Open Figma.
-   - Go to `Plugins > Development > Import Plugin from Manifest...`.
-   - Select the `manifest.json` file from the project directory.
+Load the plugin in Figma:
+- Open Figma
+- Go to `Plugins > Development > Import Plugin from Manifest...`
+- Select the `manifest.json` file
 
 ---
 
-## 🧩 The Wrapper Component
+## 🧩 Included: Icon Wrapper Components
 
-The wrapper is a reusable React component that simplifies the use of exported icons. It allows you to manage size, color, animations, and interactions in a centralized way.
-
-### Learn More
+Two React wrappers are provided for easy integration:
 
 - [Standard Wrapper Documentation](./examples/standard/README.md)
 - [Framer Motion Wrapper Documentation](./examples/framer/README.md)
 
+They allow centralized control over icon size, color, and animation logic—ideal for design systems and UI libraries.
+
 ---
 
-## 🛠️ How to Use the Plugin
+## 📘 How It Works
 
-1. **Select a Frame**: Choose a frame, component, or instance in your Figma file.
-2. **Customize Options**:
-   - Enter a name for the component.
-   - Define an interface name.
-   - Enable or disable Framer Motion support.
-3. **Preview the Code**: Click "Show Preview" to see the generated code.
-4. **Export**: Click "Export Icons" to download the React component.
+1. Select a frame, component, or instance.
+2. Fill in:
+   - **Component Name**
+   - **Interface Name**
+   - **Enable Framer Motion** (optional)
+3. Click **Export Icons** to generate your files.
 
 ---
 
 ## 👨‍💻 Author
 
-Created with ❤️ by [IvanDF](https://ivandf.netlify.app).  
-Have feedback or want to collaborate? Feel free to reach out!
+Made with ❤️ by [IvanDF](https://ivandf.netlify.app) –
+For feedback, bugs, or collaborative sparks, open an issue or drop a line. ✉️
 
 ---
 
-## 📣 Support
+## ⭐ Support & Share
 
-If you find Icon Builder helpful, please ⭐ the repository and share it with your network!
+If Icon Builder saves you time (and your sanity):
+- ⭐ Star this repo on GitHub!
+- 🔁 Share it with fellow designers and developers.
 
 [![GitHub Stars](https://img.shields.io/github/stars/IvanDF/icon-builder?style=social)](https://github.com/IvanDF/icon-builder/stargazers)
