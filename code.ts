@@ -111,7 +111,7 @@ figma.ui.onmessage = async (msg) => {
 
         const paths = svgContent.match(/<path[^>]*>/g) || [];
         const motionPaths = paths
-          .map((path) => {
+          .map((path, index) => {
             const camelCasePath = path
               .replace(/-([a-z])/g, (_, char) => char.toUpperCase())
               .replace(/<path|\/>/g, "")
@@ -120,16 +120,27 @@ figma.ui.onmessage = async (msg) => {
               .replace(/>/g, "")
               .trim();
 
+            const childName =
+              node.children && node.children[index]?.name.toLowerCase();
+            const className =
+              childName &&
+              childName !== "vector" &&
+              !childName.startsWith("rectangle")
+                ? `className=\"${childName}\"`
+                : "";
+
             return useFramerMotion
               ? `
                 <motion.path
                   ${camelCasePath}
+                  ${className}
                   {...props}
                 />
               `.trim()
               : `
                 <path
                   ${camelCasePath}
+                  ${className}
                   {...props}
                 />
               `.trim();
@@ -151,12 +162,12 @@ figma.ui.onmessage = async (msg) => {
           type: "download-file",
           fileName: `${sanitizedName}.tsx`,
           content: tsxContent,
-          folderName: "Downloads",
+          folderName: "Icons",
         });
-
-        figma.notify(`Prepared ${sanitizedName}.tsx for download.`);
       }
     }
+
+    figma.notify(`${selection.length} icons prepared for download.`);
   }
 
   if (msg.type === "export-wrapper") {
